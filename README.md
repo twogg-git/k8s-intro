@@ -22,6 +22,24 @@ kubectl get nodes
 This command shows all nodes that can be used to host our applications.
 Status Ready: this node it is ready to accept applications for deployment.
 
+```sh
+kubectl get deployments
+```
+List your deployments. In this case, there is 1 deployment running a single instance of *kubernetes-bootcamp*. (The instance is running inside a Docker container on that node).
+
+Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network. When we use kubectl, we're interacting through an API endpoint to communicate with our application.
+
+```sh
+kubectl delete deployment <deploy-name>
+```
+Note that every pod is generated based on its deployment file. Hence, every time you delete a pod, it comes up again because you defined the value 'replicas: X' in the deployment file. 
+
+To delete a Pod/s permanently, You will have to first delete the deployment file of that pod and then delete the pod. This will delete the pod permanently. And of course, the deployment itself will be deleted permanently. The command to do that is 
+```sh
+kubectl delete -f deployment_file_name.yml
+```
+And sure you can alternatively, delete the deployment file from Kubernetes's UI as well.
+
 ## kubernetes Bootcamp sample app
 
 ```sh
@@ -37,9 +55,7 @@ This command performed a few things for you:
 ```sh
 kubectl get deployments
 ```
-List your deployments. In this case, there is 1 deployment running a single instance of *kubernetes-bootcamp*. (The instance is running inside a Docker container on that node).
-
-Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network. When we use kubectl, we're interacting through an API endpoint to communicate with our application.
+Run this command to check your current deployment of kubernetes-bootcamp
 
 ## Kubectl Proxy
 
@@ -64,7 +80,4 @@ echo $POD_NAME
 Now we can make an HTTP request to the application running in that pod:
 http://localhost:8001/api/v1/proxy/namespaces/default/pods/$POD_NAME/
 
-```sh
-kubectl delete deployment kubernetes-bootcamp
-```
 
