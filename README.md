@@ -1,6 +1,20 @@
 # k8s-intro
 Useful beginners intro to Kubernetes
 
+
+https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster
+
+kubectl run twogg --image=twogghub/k8s-intro:1.2-k8s
+kubectl expose deployment twogg --port=8080 --external-ip=$(minikube ip) --type=LoadBalancer
+kubectl get services
+kubectl describe service twog
+kubectl set image deployment twogg twogg=twogghub/k8s-intro:1.3-k8s
+kubectl scale --replicas=3 deployment twogg
+kubectl get pods -o wide 
+kubectl delete pod 
+kubectl get pods -o wide -w
+kubectl get deployment twogg -o wide
+
 **Note:** To follow this tutorial you need to install minikube locally. Here the instructions: https://github.com/kubernetes/minikube/
 
 ## Initial commands
