@@ -29,7 +29,7 @@ import (
 
 // Command-line flags.
 var (
-	httpAddr   = flag.String("http", ":8081", "Listen address")
+	httpAddr   = flag.String("http", ":8080", "Listen address")
 	pollPeriod = flag.Duration("poll", 5*time.Second, "Poll period")
 	version    = flag.String("version", "1.9.0", "Go version")
 	iphost     = flag.String("iphost", "127.0.0.1", "IP Host")
