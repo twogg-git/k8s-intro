@@ -1,4 +1,5 @@
 ![header](https://raw.githubusercontent.com/twogg-git/k8s-intro/master/kubernetes_katacoda.png)
+
 **Note:** To follow this tutorial we are going to use [Katacoda Single-Node-Cluster](https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster) a minikube cloud provider. If you want to try this exercices locally, here is [Minikube setup](https://github.com/kubernetes/minikube/) link.
 
 # Kubernetes Intro 
