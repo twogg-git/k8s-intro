@@ -1,12 +1,8 @@
 ![header](https://raw.githubusercontent.com/twogg-git/k8s-intro/master/kubernetes_katacoda.png)
 
 # k8s-intro
-Useful beginners intro to Kubernetes
 
-**Note:** To follow this tutorial you need start a minikube service here: 
-https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster
-
-If you want to try this exercices locally, here is minikube installation link: https://github.com/kubernetes/minikube/
+**Note:** To follow this tutorial we are going to use [Katacoda Single-Node-Cluster](https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster) a minikube cloud provider. If you want to try this exercices locally, here is [Minikube setup](https://github.com/kubernetes/minikube/) link.
 
 ## Initial commands
 
@@ -28,22 +24,27 @@ This command shows all nodes that can be used to host our applications.
 Status Ready: this node it is ready to accept applications for deployment.
 
 ```sh
-kubectl get deployments
+kubectl get all 
 ```
-List your deployments. In this case, there is 1 deployment running a single instance of *kubernetes-bootcamp*. (The instance is running inside a Docker container on that node).
+List your deployments. 
 
-Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network. When we use kubectl, we're interacting through an API endpoint to communicate with our application.
+
+```sh
+kubectl delete pod <pod-id>
+```
+**Note:** Every pod is generated based on its deployment file. Hence, every time you delete a pod, it comes up again because you defined the value 'replicas: X' in the deployment file. 
 
 ```sh
 kubectl delete deployment <deploy-name>
 ```
-Note that every pod is generated based on its deployment file. Hence, every time you delete a pod, it comes up again because you defined the value 'replicas: X' in the deployment file. 
+To delete a Pod/s permanently, You will have to first delete the deployment of that pod and then delete the pod. This will delete the pod permanently. And of course, the deployment itself will be deleted permanently. 
 
-To delete a Pod/s permanently, You will have to first delete the deployment file of that pod and then delete the pod. This will delete the pod permanently. And of course, the deployment itself will be deleted permanently. The command to do that is 
+
+And sure you can alternatively, delete the deployment file from Kubernetes's UI as well.
 ```sh
 kubectl delete -f deployment_file_name.yml
 ```
-And sure you can alternatively, delete the deployment file from Kubernetes's UI as well.
+
 
 ## kubernetes Go sample app
 
@@ -62,6 +63,11 @@ This command performed a few things for you:
 ```sh
 kubectl expose deployment twogg --port=8080 --external-ip=$(minikube ip) --type=LoadBalancer
 ```
+
+```sh
+kubectl get deployments
+```
+In this case, there is 1 deployment running a single instance of *twogg*. (The instance is running inside a Docker container on that node). Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network. When we use kubectl, we're interacting through an API endpoint to communicate with our application.
 
 ```sh
 kubectl get services
@@ -118,7 +124,7 @@ kubectl exec -ti <pod-id>  /bin/bash
 
 ## Kubectl Proxy
 
-Note: Please try this part locally, Katacoda does not support Kubernetes proxy. 
+**Note:** Please try this commands locally, Katacoda Kubernetes playground does not support a cloud Kubernetes proxy. 
 
 ```sh
 kubectl proxy
