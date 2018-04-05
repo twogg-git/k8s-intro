@@ -1,10 +1,9 @@
 ![header](https://raw.githubusercontent.com/twogg-git/k8s-intro/master/kubernetes_katacoda.png)
 
+
 **Note:** To follow this tutorial we are going to use [Katacoda Single-Node-Cluster](https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster) a minikube cloud provider. If you want to try this exercices locally, here is [Minikube setup](https://github.com/kubernetes/minikube/) link.
 
-# Kubernetes Intro 
-
-## Initial commands
+## Kubernetes basics commands
 
 ```sh
 minikube start
@@ -46,7 +45,9 @@ kubectl delete -f deployment_file_name.yml
 ```
 
 
-## kubernetes Go sample app
+## Kubernetes Deployment Commands 
+Now, we are going to practice deployment and managemnt commnands of a [Golang app image](https://hub.docker.com/r/twogghub/k8s-intro/) stored in Docker Hub.
+
 
 ```sh
 kubectl run twogg --image=twogghub/k8s-intro:1.4-k8s
@@ -59,15 +60,15 @@ This command performed a few things for you:
 - Scheduled the application to run on that Node
 - Configured the cluster to reschedule the instance on a new Node when needed
 
-
-```sh
-kubectl expose deployment twogg --port=8080 --external-ip=$(minikube ip) --type=LoadBalancer
-```
-
 ```sh
 kubectl get deployments
 ```
 In this case, there is 1 deployment running a single instance of *twogg*. (The instance is running inside a Docker container on that node). Pods that are running inside Kubernetes are running on a private, isolated network. By default they are visible from other pods and services within the same kubernetes cluster, but not outside that network. When we use kubectl, we're interacting through an API endpoint to communicate with our application.
+
+
+```sh
+kubectl expose deployment twogg --port=8080 --external-ip=$(minikube ip) --type=LoadBalancer
+```
 
 ```sh
 kubectl get services
