@@ -151,10 +151,10 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 // tmpl is the HTML template that drives the user interface.
 var tmpl = template.Must(template.New("tmpl").Parse(`
 <!DOCTYPE html><html><body><center>
-	<img src="https://raw.githubusercontent.com/twogg-git/k8s-intro/master/kubernetes_katacoda.png" alt="Kubernetes & Katacoda" style="width:400px;height:200px;">
-	<h1 style="color:green">Playing with Kubernetes & Katacoda!</h1>
-	<h2 style="color:blue">Your server IP: {{.Version}}</h2>
-	<h3 style="color:blue">This is a fresh new version!!!</h3>	
-	<h3 style="color:blue">Rolling version [1.3-k8s}</h3>	
+<h1 style="color:grey">Playing with Kubernetes & Katacoda!</h1>
+ <h2 style="color:blue">Your server IP: {{.Version}}</h2>
+ <h3 style="color:blue">This is a fresh new version!!!</h3>	
+<h3 style="color:blue">Rolling version [1.4-k8s}</h3>	
+<img src="https://raw.githubusercontent.com/twogg-git/k8s-intro/master/kubernetes_katacoda.png" alt="Kubernetes & Katacoda" style="width:400px;height:200px;">
 </center></body></html>
 `))
