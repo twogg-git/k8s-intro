@@ -3,21 +3,10 @@
 # k8s-intro
 Useful beginners intro to Kubernetes
 
-
+**Note:** To follow this tutorial you need start a minikube service here: 
 https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster
 
-kubectl run twogg --image=twogghub/k8s-intro:1.2-k8s
-kubectl expose deployment twogg --port=8080 --external-ip=$(minikube ip) --type=LoadBalancer
-kubectl get services
-kubectl describe service twog
-kubectl set image deployment twogg twogg=twogghub/k8s-intro:1.3-k8s
-kubectl scale --replicas=3 deployment twogg
-kubectl get pods -o wide 
-kubectl delete pod 
-kubectl get pods -o wide -w
-kubectl get deployment twogg -o wide
-
-**Note:** To follow this tutorial you need to install minikube locally. Here the instructions: https://github.com/kubernetes/minikube/
+If you want to try this exercices locally, here is minikube installation link: https://github.com/kubernetes/minikube/
 
 ## Initial commands
 
@@ -56,24 +45,80 @@ kubectl delete -f deployment_file_name.yml
 ```
 And sure you can alternatively, delete the deployment file from Kubernetes's UI as well.
 
-## kubernetes Bootcamp sample app
+## kubernetes Go sample app
 
 ```sh
-kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
+kubectl run twogg --image=twogghub/k8s-intro:1.4-k8s
 ```
-The run command creates a new deployment. Here we include the deployment name, app image location (include the full repository url for images hosted outside Docker hub), and specific port.
+
+The run command creates a new deployment. Here we include the deployment name, and app image location (include the full repository url for images hosted outside Docker hub).
 
 This command performed a few things for you:
 - Searched for a suitable node where an instance of the application could be run (we have only 1 available node)
 - Scheduled the application to run on that Node
 - Configured the cluster to reschedule the instance on a new Node when needed
 
+
 ```sh
-kubectl get deployments
+kubectl expose deployment twogg --port=8080 --external-ip=$(minikube ip) --type=LoadBalancer
 ```
-Run this command to check your current deployment of kubernetes-bootcamp
+
+```sh
+kubectl get services
+```
+
+```sh
+kubectl get pods
+```
+
+```sh
+kubectl get pods,services --output wide
+```
+
+```sh
+kubectl describe service twog
+```
+
+```sh
+kubectl set image deployment twogg twogg=twogghub/k8s-intro:1.5-k8s
+```
+
+```sh
+kubectl scale --replicas=3 deployment twogg
+```
+
+```sh
+kubectl get pods --output wide --watch
+```
+
+```sh
+kubectl get pods --output wide 
+```
+
+```sh
+kubectl delete pod <pod-id>
+```
+
+```sh
+kubectl get deployment twogg --output wide
+```
+
+```sh
+kubectl logs <pod-id>
+```
+
+```sh
+kubectl get pod <pod-id> --output=yaml
+```
+
+```sh
+kubectl exec -ti <pod-id>  /bin/bash
+```
+
 
 ## Kubectl Proxy
+
+Note: Please try this part locally, Katacoda does not support Kubernetes proxy. 
 
 ```sh
 kubectl proxy
