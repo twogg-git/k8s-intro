@@ -58,7 +58,7 @@ In this case, there is 1 deployment running a single instance of *twogg*. (The i
 **Cluster Ip Exposure**
 
 The following are the exposure types that Kubernetes provides for your applications:
-- ClusterIp: Expose service through k8s cluster** with ip/name:port
+- ClusterIp: Expose service through k8s cluster with ip/name:port
 - NodePort: Expose service through vm's also external to k8s ip/name:port
 - LoadBalancer: Expose service to external connections or whatever you defined in your load balancer setup.
 
@@ -116,7 +116,7 @@ With the proxy running now we have a connection between our host and the Kuberne
 - Hosted APIs now are available at: http://localhost:8001 
 - To get the version: http://localhost:8001/version
 
-The API server will automatically create an endpoint for each pod, based on the pod name, that is also accessible through the proxy. 
+The API server will automatically create an endpoint for each pod, based on the pod name.
 
 ```sh
 # First we need to get the Pod name, and we'll store in the environment variable POD_NAME
