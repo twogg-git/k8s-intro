@@ -113,8 +113,8 @@ kubectl proxy
 ```
 
 With the proxy running now we have a connection between our host and the Kubernetes cluster.
-Hosted APIs now are available at: http://localhost:8001 
-To get the version: http://localhost:8001/version
+- Hosted APIs now are available at: http://localhost:8001 
+- To get the version: http://localhost:8001/version
 
 The API server will automatically create an endpoint for each pod, based on the pod name, that is also accessible through the proxy. 
 
