@@ -10,10 +10,10 @@ We are going to use Minikube to deploy Kubernetes locally. It comes with support
 The Minikube CLI can be used to start, stop, delete, obtain status, and perform other actions on the virtual machine. 
 
 ```sh
-# First start a virtual machine with Minikube in your terminal, then a Kubernetes cluster will be runnig in that VM.
+# Start a virtual machine with Minikube, then a Kubernetes cluster will be runnig in that VM
 minikube start
 
-# With Kubernetes we have a running master and a dashboard. The dashboard allows you to view your applications in a UI. 
+# The dashboard allows you to view your applications in a UI 
 minikube dashboard
 ```
 
@@ -22,13 +22,13 @@ minikube dashboard
 Kubectl is the native CLI for Kubernetes, it performs actions on the Kubernetes cluster once the Minikube virtual machine has been started.
 
 ```sh
-# cluster-info will display addresses of the master and services with label kubernetes.io/cluster-service=true 
+# Display addresses of the master and services with label kubernetes.io/cluster-service=true 
 kubectl cluster-info
 
 # To further debug and diagnose cluster problems use
 kubectl cluster-info dump
 
-# To show all nodes on that cluster use, (only "Status Ready" nodes will accept applications for deployment)
+# Show all nodes on that cluster, only "Status Ready" nodes will accept applications for deployment
 kubectl get nodes
 
 # Outputs the most important information about all the resources available
