@@ -17,7 +17,7 @@ minikube start
 minikube dashboard
 ```
 
-## Kubectl basics commands
+## Basics commands
 
 Kubectl is the native CLI for Kubernetes, it performs actions on the Kubernetes cluster once the Minikube virtual machine has been started.
 
@@ -35,14 +35,13 @@ kubectl get nodes
 kubectl get all 
 ```
 
-## Kubernetes Deployment Commands 
+## Deployment Commands 
 
 Now, we are going to practice deployment and managemnt commnands with a [Golang app image](https://hub.docker.com/r/twogghub/k8s-intro/) stored in Docker Hub.
 
 ```sh
 kubectl run twogg --image=twogghub/k8s-intro:1.4-k8s
 ```
-
 The run command creates a new deployment. Here we include the deployment name, and app image location (include the full repository url for images hosted outside Docker hub).
 
 This command performed a few things for you:
@@ -67,30 +66,35 @@ kubectl expose deployment twogg --port=8080 --external-ip=$(minikube ip) --type=
 ```
 Now, we are going to deploy a service named **twogg** accesible by the port **8080**, and expose an IP to access it outside the cluster. Also we need to optain and set an external ip from nimukube.
 
-## Kubernetes Deployment Commands 
+```sh
+kubectl get pods,services --output wide
+```
+To get detailed information on both pods ans services running use **--output wide** flag. This flags are availiable on most of the get combinations commands.
+
+## Update and Scale Commands 
 
 ```sh
-#
-kubectl get services
+# Fist we are going to get more info from our deployed service
+kubectl describe service twogg
 
-kubectl get pods
-
-kubectl get pods,services --output wide
-
-kubectl describe service twog
-
+# Now we set a new image to be deployed 
 kubectl set image deployment twogg twogg=twogghub/k8s-intro:1.5-k8s
 
+# And we are going to scale our pods to 3 replicas in our service 
 kubectl scale --replicas=3 deployment twogg
 
-kubectl get pods --output wide --watch
+# Check the deployment changes with 
+kubectl get deployment twogg --output wide
+```
 
+## Pod interaction commands 
+
+```sh
+# To get all pods detailed output
 kubectl get pods --output wide 
 
-kubectl delete pod <pod-id>
-
-# Get detailed deployment info 
-kubectl get deployment <deploy-name> --output wide
+# To get an open output for all pods  
+kubectl get pods --output wide --watch
 
 # Review a pod's logs
 kubectl logs <pod-id>
@@ -100,6 +104,7 @@ kubectl get pod <pod-id> --output=yaml
 
 # To interac inside the pod
 kubectl exec -ti <pod-id> /bin/bash
+
 ```
 
 ## Kubectl Proxy
@@ -142,4 +147,10 @@ kubectl delete deployment <deploy-name>
 
 # You can alternatively, delete the deployment file from Kubernetes's UI as well
 kubectl delete -f deployment_file_name.yml
+
+# To delete an specific service  
+kubectl delete service <service-name>
+
+# To delete ALL your workspace
+kubectl delete pods,services,deployments --all
 ```
