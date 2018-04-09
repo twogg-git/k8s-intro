@@ -97,13 +97,13 @@ kubectl get pods --output wide
 kubectl get pods --output wide --watch
 
 # Review a pod's logs
-kubectl logs <pod-id>
+kubectl logs <pod-name>
 
 # Get pod's info output in a yaml file
-kubectl get pod <pod-id> --output=yaml
+kubectl get pod <pod-name> --output=yaml
 
 # To interac inside the pod
-kubectl exec -ti <pod-id> /bin/bash
+kubectl exec -ti <pod-name> /bin/bash
 
 ```
 
@@ -140,7 +140,7 @@ defined the value 'replicas: X' in the deployment file, to delete a Pod/s perman
 
 ```sh
 # To delete an specific pod  
-kubectl delete pod <pod-id>
+kubectl delete pod <pod-name>
 
 # This will delete the pod(s) permanently and the deployment itself will be deleted permanently 
 kubectl delete deployment <deploy-name>
